@@ -19,13 +19,11 @@ jobs:
     vmImage: 'windows-latest'
   steps:
   - powershell: |
-      choco --version
-    displayName: 'Install Chocolatey'
+      pip install pyinstaller
+    displayName: 'Install PyInstaller'
 
-
-  # - script: |
-  #     Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
-  #     pyinstaller python-phrase.spec
-  #     choco pack
-  #     choco push python-phrase.1.0.0.nupkg -s https://chocolatey.org/ --api-key "69ad4820-ae46-461f-aa1f-2db65ef61992"
-  #   displayName: 'Run PowerShell Commands (Windows)'
+  - script: |
+      pyinstaller python-phrase.spec
+      choco pack
+      choco push python-phrase.1.0.0.nupkg -s https://chocolatey.org/ --api-key "69ad4820-ae46-461f-aa1f-2db65ef61992"
+    displayName: 'Run PowerShell Commands (Windows)'
