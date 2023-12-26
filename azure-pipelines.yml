@@ -2,33 +2,30 @@ trigger:
 - main
 
 jobs:
-- job: PublishPackageLinux
-  pool:
-    vmImage: ubuntu-latest
-  steps:
-  - script: |
-      pip3 install pyinstaller
-      pip3 install click
-      pip3 install twine
-      python setup.py sdist
-      twine upload dist/* --username __token__ --password "pypi-AgEIcHlwaS5vcmcCJGEyZDkzMmQ4LWQ1NGUtNDBmZC1hM2VkLTVkZDU4MTVmNDgyNwACKlszLCJlZTU4YTM5NS1mOWY2LTRhMTYtYTY1ZS05MTRkNGVmYTBiOTciXQAABiA7Xw6sYfG1aZ5TvSd5rlBHARA7vj7v5g-CW5YnrmStxg"
-    displayName: 'Publish Pypi Package (Linux)'
+# - job: PublishPackageLinux
+#   pool:
+#     vmImage: ubuntu-latest
+#   steps:
+#   - script: |
+#       pip3 install pyinstaller
+#       pip3 install click
+#       pip3 install twine
+#       python setup.py sdist
+#       twine upload dist/* --username __token__ --password "pypi-AgEIcHlwaS5vcmcCJGEyZDkzMmQ4LWQ1NGUtNDBmZC1hM2VkLTVkZDU4MTVmNDgyNwACKlszLCJlZTU4YTM5NS1mOWY2LTRhMTYtYTY1ZS05MTRkNGVmYTBiOTciXQAABiA7Xw6sYfG1aZ5TvSd5rlBHARA7vj7v5g-CW5YnrmStxg"
+#     displayName: 'Publish Pypi Package (Linux)'
 
-- job: PublishPackageWindows
+- job: InstallChocolatey
   pool:
     vmImage: 'windows-latest'
   steps:
-  - checkout: self
+  - powershell: |
+      Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+    displayName: 'Install Chocolatey'
 
-  - task: UsePythonVersion@0
-    inputs:
-      versionSpec: '3.x'
-      addToPath: true
-      architecture: 'x64'
 
-  - script: |
-      Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
-      pyinstaller python-phrase.spec
-      choco pack
-      choco push python-phrase.1.0.0.nupkg -s https://chocolatey.org/ --api-key "69ad4820-ae46-461f-aa1f-2db65ef61992"
-    displayName: 'Run PowerShell Commands (Windows)'
+  # - script: |
+  #     Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+  #     pyinstaller python-phrase.spec
+  #     choco pack
+  #     choco push python-phrase.1.0.0.nupkg -s https://chocolatey.org/ --api-key "69ad4820-ae46-461f-aa1f-2db65ef61992"
+  #   displayName: 'Run PowerShell Commands (Windows)'
