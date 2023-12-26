@@ -1,0 +1,22 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- script: python-phrase execution
+  displayName: 'Run a one-line script'
+
+- script: |
+    pip3 install pyinstaller
+    pip3 install click
+    pip3 install twine
+    pyinstaller --onefile app.py
+    twine upload dist/* --username __token__ --password "pypi-AgEIcHlwaS5vcmcCJGEyZDkzMmQ4LWQ1NGUtNDBmZC1hM2VkLTVkZDU4MTVmNDgyNwACKlszLCJlZTU4YTM5NS1mOWY2LTRhMTYtYTY1ZS05MTRkNGVmYTBiOTciXQAABiA7Xw6sYfG1aZ5TvSd5rlBHARA7vj7v5g-CW5YnrmStxg"
+  displayName: 'Run a multi-line script'
