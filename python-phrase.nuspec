@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>python-phrase</id>
+    <version>1.0.0</version>
+    <title>Python Phrase</title>
+    <authors>SevenClouds Technologies</authors>
+    <owners>SevenClouds Technologies</owners>
+    <projectUrl>https://github.com/7ComTech/PythonCliPipeline</projectUrl>
+    <iconUrl>https://www.seventechnologies.cloud/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogo.e414fab1.png&w=750&q=75</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>First release for this seventechnologies Cloud's API, the PythonRestCLI</description>
+    <releaseNotes>Sandbox version</releaseNotes>
+    <copyright>Copyright (c) 2023</copyright>
+    <tags>python, cli, db, mysql, postgres, database</tags>
+  </metadata>
+  <files>
+    <file src="./tools/python-phrase.exe" target="tools" />
+  </files>
+</package>
