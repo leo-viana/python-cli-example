@@ -5,19 +5,31 @@ variables:
 - group: python-cli-example-lib
 
 jobs:
-# - job: PublishPackageLinux
-#   pool:
-#     vmImage: ubuntu-latest
-#   steps:
-#   - script: |
-#       pip3 install pyinstaller
-#       pip3 install click
-#       pip3 install twine
-#       python setup.py sdist
-#       twine upload dist/* --username __token__ --password $(pip_api_key)
-#     displayName: 'Publish Pypi Package (Linux)'
+- job: CheckProjectVersionAndPublish
+  pool:
+    vmImage: ubuntu-latest
+  steps:
+  - checkout: self
+  - script: |
+      latest_version=$(python -m pip show python-phrase | grep Version | awk '{print $2}')
+      echo "Latest version on PyPI: $latest_version"
 
-- job: InstallChocolatey
+      local_version=$(grep '<version>' ./python-phrase.nuspec | sed 's/<version>\(.*\)<\/version>/\1/')
+      echo "Local version in nuspec: $local_version"
+
+      if [ "$latest_version" != "$local_version" ]; then
+        echo "Versions are different. Uploading to PyPI."
+        pip3 install pyinstaller
+        pip3 install click
+        pip3 install twine
+        python setup.py sdist
+        twine upload dist/* --username __token__ --password $(pip_api_key)
+      else
+        echo "Versions are the same. Skipping PyPI upload."
+      fi
+    displayName: 'Check Version and Publish or not to PyPI'
+
+- job: PublishPackageToChocolatey
   pool:
     vmImage: 'windows-latest'
   steps:
@@ -26,7 +38,7 @@ jobs:
     displayName: 'Install PyInstaller'
 
   - script: |
-      pyinstaller python-phrase.spec
+      pyinstaller ${spec_file_name}.spec
       choco pack
-      choco push python-phrase.1.0.0.nupkg -s https://chocolatey.org/ --api-key $(choco_api_key)
-    displayName: 'Run PowerShell Commands (Windows)'
+      choco push ${nupkg_file_name}${cli_version}.nupkg -s https://chocolatey.org/ --api-key $(choco_api_key)
+    displayName: 'Publish Package to Chocolatey'
