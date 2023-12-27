@@ -22,7 +22,7 @@ jobs:
         pip3 install pyinstaller
         pip3 install twine
         python setup.py sdist
-        twine upload dist/* --username __token__ --password "pypi-AgEIcHlwaS5vcmcCJGEyZDkzMmQ4LWQ1NGUtNDBmZC1hM2VkLTVkZDU4MTVmNDgyNwACKlszLCJlZTU4YTM5NS1mOWY2LTRhMTYtYTY1ZS05MTRkNGVmYTBiOTciXQAABiA7Xw6sYfG1aZ5TvSd5rlBHARA7vj7v5g-CW5YnrmStxg"
+        twine upload dist/* --username __token__ --password "pypi-AgEIcHlwaS5vcmcCJDQ3ZDMzNDcwLWZjYjctNDFlYi04YjRjLWY4ODkwNzY0MDdlMwACFVsxLFsicHl0aG9uLXBocmFzZSJdXQACLFsyLFsiZmFiNDBmZDYtZDYyMy00Nzg0LTllYTEtNzEzMjFkNGMzYmI4Il1dAAAGIIhhnASAeX2bGXAOQnfUD3EMC69MewEI2KJ_J9v9FfQx"
       else
         echo "Versions are the same. Skipping PyPI upload."
       fi
