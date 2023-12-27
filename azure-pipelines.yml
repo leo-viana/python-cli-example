@@ -22,7 +22,7 @@ jobs:
         pip3 install pyinstaller
         pip3 install twine
         python3 setup.py sdist
-        python3 -m twine upload dist/* --username __token__ --password $(pip_api_token)
+        python3 -m twine upload dist/* --username __token__ --password $(pip_api_key)
       else
         echo "Versions are the same. Skipping PyPI upload."
       fi
