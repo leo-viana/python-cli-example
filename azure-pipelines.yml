@@ -28,16 +28,16 @@ jobs:
         echo "Versions are the same. Skipping PyPI upload."
       fi
 
-- job: PublishPackageToChocolatey
-  pool:
-    vmImage: 'windows-latest'
-  steps:
-  - powershell: |
-      pip install pyinstaller
-    displayName: 'Install PyInstaller'
+# - job: PublishPackageToChocolatey
+#   pool:
+#     vmImage: 'windows-latest'
+#   steps:
+#   - powershell: |
+#       pip install pyinstaller
+#     displayName: 'Install PyInstaller'
 
-  - script: |
-      pyinstaller $(spec_file_name).spec
-      choco pack
-      choco push $(nupkg_file_name).$(choco_cli_version).nupkg -s https://chocolatey.org/ --api-key $(choco_api_key)
-    displayName: 'Publish Package to Chocolatey'
+#   - script: |
+#       pyinstaller $(spec_file_name).spec
+#       choco pack
+#       choco push $(nupkg_file_name).$(choco_cli_version).nupkg -s https://chocolatey.org/ --api-key $(choco_api_key)
+#     displayName: 'Publish Package to Chocolatey'
