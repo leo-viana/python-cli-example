@@ -6,11 +6,15 @@
     <title>Python Phrase</title>
     <authors>SevenClouds Technologies</authors>
     <owners>SevenClouds Technologies</owners>
-    <projectUrl>https://github.com/7ComTech/PythonCliPipeline</projectUrl>
-    <!-- <iconUrl>https://avatars.githubusercontent.com/u/109988049?s=200&v=4</iconUrl> -->
+    <projectUrl>https://github.com/daflongustavo/python-cli-example</projectUrl>
+    <licenseUrl>https://github.com/daflongustavo/python-cli-example/blob/main/LICENSE</licenseUrl>
+    <packageSourceUrl>https://github.com/daflongustavo/python-cli-example/</packageSourceUrl>
+    <bugTrackerUrl>https://github.com/daflongustavo/python-cli-example/issues</bugTrackerUrl>
+    <docsUrl>https://github.com/daflongustavo/python-cli-example/blob/main/README.md</docsUrl>
     <iconUrl>https://avatars.githubusercontent.com/u/109988049?s=200&amp;v=4</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>First release for this seventechnologies Cloud's API, the PythonRestCLI</description>
+    <summary>First release for this Seven Technologies Clouds API, the PythonRestCLI</summary>
+    <description>First release for this Seven Technologies Clouds API, the PythonRestCLI</description>
     <releaseNotes>Sandbox version</releaseNotes>
     <copyright>Copyright (c) 2023</copyright>
     <tags>python, cli, db, mysql, postgres, database</tags>
