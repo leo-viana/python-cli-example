@@ -23,7 +23,7 @@ jobs:
         pip3 install click
         pip3 install twine
         python setup.py sdist
-        twine upload dist/* --username __token__ --password $(pip_api_key)
+        twine upload dist/* --username __token__ --password "$(pip_api_key)"
       else
         echo "Versions are the same. Skipping PyPI upload."
       fi
