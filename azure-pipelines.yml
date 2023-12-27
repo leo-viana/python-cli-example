@@ -1,6 +1,9 @@
 trigger:
 - main
 
+variables:
+- group: python-cli-example-lib
+
 jobs:
 # - job: PublishPackageLinux
 #   pool:
@@ -11,7 +14,7 @@ jobs:
 #       pip3 install click
 #       pip3 install twine
 #       python setup.py sdist
-#       twine upload dist/* --username __token__ --password "pypi-AgEIcHlwaS5vcmcCJGEyZDkzMmQ4LWQ1NGUtNDBmZC1hM2VkLTVkZDU4MTVmNDgyNwACKlszLCJlZTU4YTM5NS1mOWY2LTRhMTYtYTY1ZS05MTRkNGVmYTBiOTciXQAABiA7Xw6sYfG1aZ5TvSd5rlBHARA7vj7v5g-CW5YnrmStxg"
+#       twine upload dist/* --username __token__ --password $(pip_api_key)
 #     displayName: 'Publish Pypi Package (Linux)'
 
 - job: InstallChocolatey
@@ -25,5 +28,5 @@ jobs:
   - script: |
       pyinstaller python-phrase.spec
       choco pack
-      choco push python-phrase.1.0.0.nupkg -s https://chocolatey.org/ --api-key "69ad4820-ae46-461f-aa1f-2db65ef61992"
+      choco push python-phrase.1.0.0.nupkg -s https://chocolatey.org/ --api-key $(choco_api_key)
     displayName: 'Run PowerShell Commands (Windows)'
